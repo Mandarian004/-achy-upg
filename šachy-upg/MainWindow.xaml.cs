@@ -19,6 +19,7 @@ namespace šachy_upg
         public MainWindow()
         {
             InitializeComponent();
+            Console.WriteLine("daf");
         }
     }
 }
