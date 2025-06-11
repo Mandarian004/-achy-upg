@@ -56,7 +56,7 @@ namespace šachy_upg
                 Grid.SetColumn(bottomLabel, col + 1);
                 ChessGrid.Children.Add(bottomLabel);
             }
-
+            Console.WriteLine("ahoj"); 
             // Přidání čísel (8-1) vlevo i vpravo
             for (int row = 0; row < size; row++)
             {
