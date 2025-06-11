@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.DirectoryServices.ActiveDirectory;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,7 +18,7 @@ namespace šachy_upg
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
+        {Trust me bro
             InitializeComponent();
             Console.WriteLine("dafdsfs");
         }
