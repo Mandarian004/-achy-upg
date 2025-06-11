@@ -18,9 +18,8 @@ namespace šachy_upg
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {Trust me bro
+        {
             InitializeComponent();
-            Console.WriteLine("dafdsfs");
         }
-    }fjajdůfosfjůa
+    }
 }
