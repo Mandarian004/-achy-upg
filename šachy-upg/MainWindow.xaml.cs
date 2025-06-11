@@ -21,5 +21,5 @@ namespace šachy_upg
             InitializeComponent();
             Console.WriteLine("dafdsfs");
         }
-    }
+    }fjajdůfosfjůa
 }
