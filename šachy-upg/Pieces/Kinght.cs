@@ -21,5 +21,28 @@ namespace šachy_upg
             copy.HasMowed = HasMowed;
             return copy;
         }
+
+        private static IEnumerable<Pozice> PotentialToPosition(Pozice from)
+        {
+            foreach (Smer vDir in new Smer[] { Smer.North, Smer.South})
+            {
+                foreach (Smer hDir in new Smer[] { Smer.West, Smer.East })
+                {
+                    yield return from + 2 * vDir + hDir;
+                    yield return from + 2 * hDir + vDir;
+                }
+            }
+        }
+
+        private IEnumerable<Pozice> MovePosition(Pozice from, Deska deska)
+        {
+            return PotentialToPosition(from).Where(pos => Deska.IsInside(pos) && (deska.IsEmpty(pos) || deska[pos].Color != Color));
+        }
+
+        public override IEnumerable<Move> GetMoves(Pozice from, Deska deska)
+        {
+            return MovePosition(from, deska).Select(to => new NormalMove(from, to));
+        }
+
     }
 }

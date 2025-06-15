@@ -18,89 +18,71 @@ namespace šachy_upg
             CreateChessBoard();
         }
 
+
         private void CreateChessBoard()
         {
             ChessGrid.Children.Clear();
             ChessGrid.RowDefinitions.Clear();
             ChessGrid.ColumnDefinitions.Clear();
 
-            // Přidáme řádky a sloupce (8 políček + 2 okraje pro popisky)
-            for (int i = 0; i < size + 2; i++)
+            for (int i = 0; i < size; i++)
             {
                 ChessGrid.RowDefinitions.Add(new RowDefinition());
                 ChessGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            // Přidání písmen (a-h) nahoře a dole
-            for (int col = 0; col < size; col++)
-            {
-                var topLabel = new TextBlock()
-                {
-                    Text = ((char)('a' + col)).ToString(),
-                    FontWeight = FontWeights.Bold,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                Grid.SetRow(topLabel, 0);
-                Grid.SetColumn(topLabel, col + 1);
-                ChessGrid.Children.Add(topLabel);
-
-                var bottomLabel = new TextBlock()
-                {
-                    Text = ((char)('a' + col)).ToString(),
-                    FontWeight = FontWeights.Bold,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                Grid.SetRow(bottomLabel, size + 1);
-                Grid.SetColumn(bottomLabel, col + 1);
-                ChessGrid.Children.Add(bottomLabel);
-            }
-            Console.WriteLine("ahoj"); 
-            Console.WriteLine("nazdar");
-            // Přidání čísel (8-1) vlevo i vpravo
-            for (int row = 0; row < size; row++)
-            {
-                var leftLabel = new TextBlock()
-                {
-                    Text = (size - row).ToString(),
-                    FontWeight = FontWeights.Bold,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                Grid.SetRow(leftLabel, row + 1);
-                Grid.SetColumn(leftLabel, 0);
-                ChessGrid.Children.Add(leftLabel);
-
-                var rightLabel = new TextBlock()
-                {
-                    Text = (size - row).ToString(),
-                    FontWeight = FontWeights.Bold,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                Grid.SetRow(rightLabel, row + 1);
-                Grid.SetColumn(rightLabel, size + 1);
-                ChessGrid.Children.Add(rightLabel);
-            }
-
-            // Vytvoření políček šachovnice
             for (int row = 0; row < size; row++)
             {
                 for (int col = 0; col < size; col++)
                 {
+                    var cellGrid = new Grid();
+
                     var rect = new Rectangle
                     {
                         Fill = ((row + col) % 2 == 0) ? color1 : color2,
                         Stroke = Brushes.Black,
                         StrokeThickness = 1
                     };
-                    Grid.SetRow(rect, row + 1);
-                    Grid.SetColumn(rect, col + 1);
-                    ChessGrid.Children.Add(rect);
+                    cellGrid.Children.Add(rect);
+
+                    // Čísla 1–8 vpravo, 1 nahoře
+                    if (col == size - 1)
+                    {
+                        var numberLabel = new TextBlock
+                        {
+                            Text = (row + 1).ToString(),
+                            FontWeight = FontWeights.Bold,
+                            FontSize = 12,
+                            HorizontalAlignment = HorizontalAlignment.Right,
+                            VerticalAlignment = VerticalAlignment.Top,
+                            Margin = new Thickness(0, 2, 2, 0)
+                        };
+                        cellGrid.Children.Add(numberLabel);
+                    }
+
+                    // Písmena h–a dole, a úplně vpravo
+                    if (row == size - 1)
+                    {
+                        var letterLabel = new TextBlock
+                        {
+                            Text = ((char)('a' + col)).ToString(),
+                            FontWeight = FontWeights.Bold,
+                            FontSize = 12,
+                            HorizontalAlignment = HorizontalAlignment.Left,
+                            VerticalAlignment = VerticalAlignment.Bottom,
+                            Margin = new Thickness(2, 0, 0, 2)
+                        };
+                        cellGrid.Children.Add(letterLabel);
+                    }
+
+                    Grid.SetRow(cellGrid, row);
+                    Grid.SetColumn(cellGrid, col);
+                    ChessGrid.Children.Add(cellGrid);
                 }
             }
         }
+
+
 
         private void ChangeColors_Click(object sender, RoutedEventArgs e)
         {
