@@ -17,7 +17,6 @@ namespace šachy_upg
             InitializeComponent();
             CreateChessBoard();
         }
-        Console.WriteLine("Ahoj");
 
         private void CreateChessBoard()
         {
