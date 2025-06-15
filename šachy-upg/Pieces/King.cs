@@ -4,9 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace šachy_upg.Pieces
+namespace šachy_upg
 {
-    class King
+    public class King : Piece
     {
+        public override PieceType Type => PieceType.King;
+        public override hrac Color { get; }
+        public King(hrac color)
+        {
+            Color = color;
+        }
+
+        public override Piece Copy()
+        {
+            King copy = new King(Color);
+            copy.HasMowed = HasMowed;
+            return copy;
+        }
     }
 }

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace šachy_upg
 {
-    public enum PieceType
+    public enum MoveType
     {
-        Pawn,
-        Bishop,
-        Knight,
-        Rook,
-        Quenn,
-        King
+        Normal,
+        CastleKS,
+        CastleQS,
+        DoublePawn,
+        EnPassant,
+        PawnPromotion
     }
 }

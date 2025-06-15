@@ -32,7 +32,7 @@
             return HashCode.Combine(Row, Column);
         }
 
-        public static bool operator ==(Pozice left, Pozice right)
+        public static bool operator ==(Pozice? left, Pozice? right)
         {
             return EqualityComparer<Pozice>.Default.Equals(left, right);
         }
@@ -42,9 +42,9 @@
             return !(left == right);
         }
 
-        public static Smer operator +(Pozice pos, Smer dir)
+        public static Pozice operator +(Pozice pos, Smer dir)
         {
-            return new Smer(pos.Row + dir.RowDelta, pos.Column + dir.ColumnDelta);
+            return new Pozice(pos.Row + dir.RowDelta, pos.Column + dir.ColumnDelta);
         }
     }
 }
