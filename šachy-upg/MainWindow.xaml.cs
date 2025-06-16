@@ -32,6 +32,7 @@ namespace šachy_upg
 
             gameState = new GameState(hrac.White, Deska.Initial());
             DrawBoard(gameState.Deska);
+            SetCursor(gameState.CurrentHrac);
         }
 
         private void InitializeBoard()
@@ -141,6 +142,18 @@ namespace šachy_upg
             {
                 highlights[to.Row, to.Column].Fill = Brushes.Transparent;
 
+            }
+        }
+
+        private void SetCursor(hrac hrac)
+        {
+            if (hrac == hrac.White)
+            {
+                Cursor = ChessCursor.WhiteCursor;
+            }
+            else
+            {
+                Cursor = ChessCursor.WhiteCursor;
             }
         }
     }
