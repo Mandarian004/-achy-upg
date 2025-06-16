@@ -10,18 +10,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="figurky\BishopB.png" />
+    <None Remove="figurky\BishopW.png" />
     <None Remove="figurky\Board.png" />
+    <None Remove="figurky\CursorB.cur" />
+    <None Remove="figurky\CursorW.cur" />
     <None Remove="figurky\icon.ico" />
     <None Remove="figurky\KingB.png" />
+    <None Remove="figurky\KingW.png" />
+    <None Remove="figurky\KnightB.png" />
+    <None Remove="figurky\KnightW.png" />
+    <None Remove="figurky\PawnB.png" />
+    <None Remove="figurky\PawnW.png" />
+    <None Remove="figurky\QueenB.png" />
+    <None Remove="figurky\QueenW.png" />
+    <None Remove="figurky\RookB.png" />
+    <None Remove="figurky\RookW.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="figurky\Board.png">
+    <Resource Include="figurky\Board.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="figurky\KingB.png">
+    </Resource>
+    <Resource Include="figurky\KingB.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="figurky\BishopB.png" />
+    <Resource Include="figurky\BishopW.png" />
+    <Resource Include="figurky\CursorB.cur" />
+    <Resource Include="figurky\CursorW.cur" />
+    <Resource Include="figurky\KingW.png" />
+    <Resource Include="figurky\KnightB.png" />
+    <Resource Include="figurky\KnightW.png" />
+    <Resource Include="figurky\PawnB.png" />
+    <Resource Include="figurky\PawnW.png" />
+    <Resource Include="figurky\QueenB.png" />
+    <Resource Include="figurky\QueenW.png" />
+    <Resource Include="figurky\RookB.png" />
+    <Resource Include="figurky\RookW.png" />
   </ItemGroup>
 
 </Project>
