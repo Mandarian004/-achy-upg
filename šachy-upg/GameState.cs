@@ -23,7 +23,8 @@ namespace šachy_upg
                 return Enumerable.Empty<Move>();
             }
             Piece piece = Deska[pos];
-            return piece.GetMoves(pos, Deska);
+           IEnumerable<Move> moveCandidates = piece.GetMoves(pos, Deska);
+            return moveCandidates.Where(move => move.IsLegal(Deska));
         }
 
         public void MakeMove(Move move)

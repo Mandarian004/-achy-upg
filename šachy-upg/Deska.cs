@@ -4,16 +4,17 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace šachy_upg
 {
     public class Deska
     {
-        private readonly Piece[,] pieces = new Piece[8,8];
+        private readonly Piece[,] pieces = new Piece[8, 8];
 
         public Piece this[int row, int col]
         {
-            get { return pieces[ row, col]; }
+            get { return pieces[row, col]; }
             set { pieces[row, col] = value; }
         }
 
@@ -53,7 +54,7 @@ namespace šachy_upg
             this[7, 7] = new Rook(hrac.White);
 
             //černý + bílý pěšáci
-            for (int c = 0; c<8;c++)
+            for (int c = 0; c < 8; c++)
             {
                 this[1, c] = new Pawn(hrac.Black);
                 this[6, c] = new Pawn(hrac.White);
@@ -68,6 +69,49 @@ namespace šachy_upg
         public bool IsEmpty(Pozice pos)
         {
             return this[pos] == null;
+        }
+
+        public IEnumerable<Pozice> PiecePositions()
+        {
+            for (int r = 0; r < 8; r++)
+            {
+                for (int c = 0; c < 8; c++)
+                {
+                    Pozice pos = new Pozice(r, c);
+
+                    if (!IsEmpty(pos))
+                    {
+                        yield return pos;
+                    }
+
+                }
+            }
+        }
+
+        public IEnumerable<Pozice> PiecePositionsFor(hrac hrac)
+        {
+            return PiecePositions().Where(pos => this[pos].Color == hrac);
+        }
+
+        public bool IsIncheck(hrac hrac)
+        {
+            return PiecePositionsFor(hrac.protihrac()).Any(pos =>
+            {
+                Piece piece = this[pos];
+                return piece.CanCaptureOpponentKing(pos, this);
+            });
+        }
+
+        public Deska Copy()
+        {
+            Deska copy = new Deska();
+
+            foreach (Pozice pos in PiecePositions())
+            {
+                copy[pos] = this[pos].Copy();
+            }
+
+            return copy;
         }
     }
 }

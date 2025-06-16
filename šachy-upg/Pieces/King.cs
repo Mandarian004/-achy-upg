@@ -63,5 +63,13 @@ namespace šachy_upg
             }
         }
 
+        public override bool CanCaptureOpponentKing(Pozice from, Deska deska)
+        {
+            return MovePositions(from, deska).Any(to =>
+            {
+                Piece piece = deska[to];
+                return piece != null && piece.Type == PieceType.King;
+            });
+        }
     }
 }

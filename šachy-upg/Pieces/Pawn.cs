@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
 
 namespace šachy_upg
@@ -82,5 +83,14 @@ namespace šachy_upg
             return ForwardMoves(from, deska).Concat(DiagonalMoves(from, deska));
         }
 
+        public override bool CanCaptureOpponentKing(Pozice from, Deska deska)
+        {
+            return DiagonalMoves(from, deska).Any(move =>
+            {
+                Piece piece = deska[move.ToPos];
+                return piece != null && piece.Type == PieceType.King;
+
+            });
+        }
     }
 }

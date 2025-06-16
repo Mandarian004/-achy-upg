@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace šachy_upg
+﻿namespace šachy_upg
 {
     public abstract class Piece
     {
@@ -38,6 +32,15 @@ namespace šachy_upg
         protected IEnumerable<Pozice> MovePositionsInDirs(Pozice from, Deska deska, Smer[] dirs)
         {
             return dirs.SelectMany(dir => MovePositionsInDir(from, deska, dir));
+        }
+
+        public virtual bool CanCaptureOpponentKing(Pozice from, Deska deska)
+        {
+            return GetMoves(from, deska).Any(move =>
+            {
+                Piece piece = deska[move.ToPos];
+                return piece != null && piece.Type == PieceType.King;
+            });
         }
     }
 }
