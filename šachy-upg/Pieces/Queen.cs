@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace šachy_upg
 {
-    public class Quenn : Piece
+    public class Queen : Piece
     {
-        public override PieceType Type => PieceType.Quenn;
+        public override PieceType Type => PieceType.Queen;
         public override hrac Color { get; }
 
         private static readonly Smer[] dirs = new Smer[]
@@ -23,14 +23,14 @@ namespace šachy_upg
                 Smer.SouthWest
             };
 
-        public Quenn(hrac color)
+        public Queen(hrac color)
         {
             Color = color;
         }
 
         public override Piece Copy()
         {
-            Quenn copy = new Quenn(Color);
+            Queen copy = new Queen(Color);
             copy.HasMowed = HasMowed;
             return copy;
         }

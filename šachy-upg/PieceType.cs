@@ -12,7 +12,7 @@ namespace šachy_upg
         Bishop,
         Knight,
         Rook,
-        Quenn,
+        Queen,
         King
     }
 }

@@ -18,9 +18,41 @@ namespace šachy_upg
     public partial class MainWindow : Window
     {
         private readonly Image[,] pieceImage = new Image[8, 8];
+
+        private GameState gameState;
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeBoard();
+
+            gameState = new GameState(hrac.White, Deska.Initial());
+            DrawBoard(gameState.Deska);
+        }
+
+        private void InitializeBoard()
+        {
+            for(int r=0;r<8;r++)
+            {
+                for (int c=0;c<8;c++)
+                {
+                    Image image = new Image();
+                    pieceImage[r, c] = image;
+                    PieceGrid.Children.Add(image);
+                }
+            }
+        }
+
+        private void DrawBoard(Deska deska)
+        {
+            for (int r=0; r<8;r++)
+            {
+                for (int c = 0;c<8;c++)
+                {
+                    Piece piece = deska[r, c];
+                    pieceImage[r, c].Source = Obrazky.GetImage(piece);
+                }
+            }
         }
     }
 }

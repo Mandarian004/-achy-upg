@@ -36,7 +36,7 @@ namespace šachy_upg
             this[0, 0] = new Rook(hrac.Black);
             this[0, 1] = new Knight(hrac.Black);
             this[0, 2] = new Bishop(hrac.Black);
-            this[0, 3] = new Quenn(hrac.Black);
+            this[0, 3] = new Queen(hrac.Black);
             this[0, 4] = new King(hrac.Black);
             this[0, 5] = new Bishop(hrac.Black);
             this[0, 6] = new Knight(hrac.Black);
@@ -46,7 +46,7 @@ namespace šachy_upg
             this[7, 0] = new Rook(hrac.White);
             this[7, 1] = new Knight(hrac.White);
             this[7, 2] = new Bishop(hrac.White);
-            this[7, 3] = new Quenn(hrac.White);
+            this[7, 3] = new Queen(hrac.White);
             this[7, 4] = new King(hrac.White);
             this[7, 5] = new Bishop(hrac.White);
             this[7, 6] = new Knight(hrac.White);
