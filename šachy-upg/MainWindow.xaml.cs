@@ -153,7 +153,7 @@ namespace šachy_upg
             }
             else
             {
-                Cursor = ChessCursor.WhiteCursor;
+                Cursor = ChessCursor.BlackCursor;
             }
         }
     }
