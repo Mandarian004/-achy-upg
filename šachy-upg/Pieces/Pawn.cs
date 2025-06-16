@@ -67,7 +67,7 @@ namespace šachy_upg
 
         private IEnumerable<Move> DiagonalMoves(Pozice from, Deska deska)
         {
-            foreach (Smer dir in new Smer[] { Smer.West, Smer.South })
+            foreach (Smer dir in new Smer[] { Smer.West, Smer.East })
             {
                 Pozice to = from + forward + dir;
 
