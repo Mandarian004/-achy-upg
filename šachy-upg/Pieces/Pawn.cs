@@ -44,7 +44,8 @@ namespace šachy_upg
         private bool CanCaptureAt(Pozice pos, Deska deska)
         {
             if (!Deska.IsInside(pos) || deska.IsEmpty(pos))
-            { return false;
+            { 
+                return false;
             }
             return deska[pos].Color != Color;
         }
@@ -70,7 +71,7 @@ namespace šachy_upg
             {
                 Pozice to = from + forward + dir;
 
-                if (CanMoveTo(to, deska)) 
+                if (CanCaptureAt(to, deska)) 
                 {
                     yield return new NormalMove(from, to); 
                 }
