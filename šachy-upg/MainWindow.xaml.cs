@@ -114,6 +114,7 @@ namespace šachy_upg
         {
             gameState.MakeMove(move);
             DrawBoard(gameState.Deska);
+            SetCursor(gameState.CurrentHrac);
         }
 
         private void CacheMoves(IEnumerable<Move> moves)
