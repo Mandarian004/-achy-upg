@@ -9,4 +9,19 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="figurky\Board.png" />
+    <None Remove="figurky\icon.ico" />
+    <None Remove="figurky\KingB.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="figurky\Board.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="figurky\KingB.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
