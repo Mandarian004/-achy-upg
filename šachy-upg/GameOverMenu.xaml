@@ -31,7 +31,7 @@
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
                 x:Name ="ReasonText"
-                Text="=REASOM TEXT"
+                Text="=REASON TEXT"
                 Style="{StaticResource TextStyle}"
                 FontSize="16"/>
 

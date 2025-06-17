@@ -1,4 +1,5 @@
-﻿using System;
+﻿using šachy_lastPart;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,17 @@ namespace šachy_upg
         public Result Result { get; private set; } = null;
 
         private int noCaptureOrPawnMoves = 0;
+        private string stateString;
+
+        private readonly Dictionary<string, int> stateHistory = new Dictionary<string, int>();
+
         public GameState(hrac hrac, Deska deska)
         {
             CurrentHrac = hrac;
             Deska = deska;
+
+            stateString = new StateString(CurrentHrac, deska).ToString();
+            stateHistory[stateString] = 1;
         }
 
         public IEnumerable<Move> LegalMOvesForPiece(Pozice pos)
@@ -38,12 +46,14 @@ namespace šachy_upg
             if (CaptureOrPwan)
             {
                 noCaptureOrPawnMoves = 0;
+                stateHistory.Clear();
             }
             else
             { 
                 noCaptureOrPawnMoves++; 
             }
             CurrentHrac = CurrentHrac.protihrac();
+            UpdateStateString();
             CheckForGameOver();
         }
 
@@ -70,9 +80,17 @@ namespace šachy_upg
                     Result = Result.draw(EndReason.Stalemate);
                 }
             }
+            else if (Deska.InsufficientMaterial(CurrentHrac))
+            {
+                Result = Result.draw(EndReason.InsufficientMaterial);
+            }
             else if (FiftyMoveRule())
             {
                 Result = Result.draw(EndReason.FiftyMoveRule);
+            }
+            else if (ThreefoldRepetition())
+            {
+                Result = Result.draw(EndReason.ThreefoldRepetition);
             }
         }
 
@@ -85,6 +103,23 @@ namespace šachy_upg
         {
             int fullMoves = noCaptureOrPawnMoves / 2;
             return fullMoves == 50;
+        }
+        private void UpdateStateString()
+        {
+            stateString = new StateString(CurrentHrac, Deska).ToString();
+
+            if (!stateHistory.ContainsKey(stateString))
+            {
+                stateHistory[stateString] = 1;
+            }
+            else
+            {
+                stateHistory[stateString]++;
+            }
+        }
+        private bool ThreefoldRepetition()
+        {
+            return stateHistory[stateString] == 3;
         }
     }
 }

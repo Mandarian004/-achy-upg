@@ -130,6 +130,68 @@ namespace šachy_upg
             return copy;
         }
 
+        public Counting CountPieces()
+        {
+            Counting counting = new Counting();
+            foreach (Pozice pos in PiecePositions())
+            {
+                Piece piece = this[pos];
+                counting.Increment(piece.Color, piece.Type);
+            }
+            return counting;
+        }
+
+
+        public bool InsufficientMaterial(hrac hrac)
+        {
+            Counting counting = CountPieces();
+
+            return IsKingVKing(counting) ||
+                IsKingKnightVKing(counting) ||
+                IsKingBishopVKing(counting) ||
+                IsKingBishopVKingBishop(counting);
+        }
+        private bool IsKingBishopVKingBishop(Counting counting)
+        {
+            if (counting.TotalCount != 4)
+            {
+                return false;
+            }
+            if (counting.White(PieceType.Bishop) != 1 || counting.Black(PieceType.Bishop) != 1)
+            {
+                return false;
+            }
+
+            Pozice wBishoPos = FindPiece(hrac.White, PieceType.Bishop);
+            Pozice bBishoPos = FindPiece(hrac.Black, PieceType.Bishop);
+
+            return wBishoPos.SquareColor() == bBishoPos.SquareColor();
+        }
+
+        private Pozice FindPiece(hrac color, PieceType type)
+        {
+            return PiecePositionsFor(color).FirstOrDefault(pos => this[pos].Type == type);
+        }
+
+        private static bool IsKingBishopVKIng(Counting counting)
+        {
+            return counting.TotalCount == 3 &&(counting.White(PieceType.Bishop) == 1 || counting.Black(PieceType.Bishop) == 1);
+        }
+        private static bool IsKingBishopVKing(Counting counting)
+        {
+            return counting.TotalCount == 3 &&(counting.White(PieceType.Bishop) == 1 || counting.Black(PieceType.Bishop) == 1);
+        }
+
+        private static bool IsKingKnightVKing(Counting counting)
+        {
+            return counting.TotalCount == 3 &&(counting.White(PieceType.Knight) == 1 || counting.Black(PieceType.Knight) == 1);
+        }
+
+        private static bool IsKingVKing(Counting counting)
+        {
+            return counting.TotalCount == 2;
+        }
+
         private bool IsUnmovedKingAndRook(Pozice kingPos, Pozice rookPos)
         {
             if (IsEmpty(kingPos) || IsEmpty(rookPos))

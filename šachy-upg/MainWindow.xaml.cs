@@ -208,6 +208,10 @@ namespace šachy_upg
                     MenuContainer.Content = null;
                     RestartGame();
                 }
+                else
+                {
+                    Application.Current.Shutdown();
+                }
             };
         }
 
@@ -218,6 +222,32 @@ namespace šachy_upg
             gameState = new GameState(hrac.White, Deska.Initial());
             DrawBoard(gameState.Deska);
             SetCursor(gameState.CurrentHrac);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!IsMenuOnScreen() && e.Key == Key.Escape)
+            {
+                ShowPauseMenu();
+            }
+        }
+
+        private void ShowPauseMenu()
+        {
+            PauseMenu pauseMenu = new PauseMenu();
+            MenuContainer.Content = pauseMenu;
+            pauseMenu.OptionSelected += option =>
+            {
+                if (option == Option.Continue)
+                {
+                    MenuContainer.Content = null;
+                }
+                else if (option == Option.Restart)
+                {
+                    RestartGame();
+                    MenuContainer.Content = null;
+                }
+            };
         }
     }
 }
