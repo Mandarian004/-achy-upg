@@ -11,11 +11,8 @@ namespace šachy_upg
         public Deska Deska { get; }
         public hrac CurrentHrac { get; private set; }
         public Result Result { get; private set; } = null;
-<<<<<<< HEAD
 
         private int noCaptureOrPawnMoves = 0;
-=======
->>>>>>> ab1dce662257a5f4e468ef8d6ffdb0ee727dd4e9
         public GameState(hrac hrac, Deska deska)
         {
             CurrentHrac = hrac;
@@ -36,7 +33,6 @@ namespace šachy_upg
         public void MakeMove(Move move)
         {
             Deska.SetPawnSkipPosition(CurrentHrac, null);
-<<<<<<< HEAD
             bool CaptureOrPwan = move.Execute(Deska);
 
             if (CaptureOrPwan)
@@ -44,10 +40,9 @@ namespace šachy_upg
                 noCaptureOrPawnMoves = 0;
             }
             else
-                { noCaptureOrPawnMoves++; }
-=======
-            move.Execute(Deska);
->>>>>>> ab1dce662257a5f4e468ef8d6ffdb0ee727dd4e9
+            { 
+                noCaptureOrPawnMoves++; 
+            }
             CurrentHrac = CurrentHrac.protihrac();
             CheckForGameOver();
         }
@@ -75,27 +70,21 @@ namespace šachy_upg
                     Result = Result.draw(EndReason.Stalemate);
                 }
             }
-<<<<<<< HEAD
             else if (FiftyMoveRule())
             {
                 Result = Result.draw(EndReason.FiftyMoveRule);
             }
-=======
->>>>>>> ab1dce662257a5f4e468ef8d6ffdb0ee727dd4e9
         }
 
         public bool IsGameOver()
         {
             return Result != null;
         }
-<<<<<<< HEAD
 
         private bool FiftyMoveRule()
         {
             int fullMoves = noCaptureOrPawnMoves / 2;
             return fullMoves == 50;
         }
-=======
->>>>>>> ab1dce662257a5f4e468ef8d6ffdb0ee727dd4e9
     }
 }
