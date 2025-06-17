@@ -170,16 +170,13 @@ namespace šachy_upg
                 Piece piece = this[pos];
                 if (piece == null || piece.Color != hrac || piece.Type != PieceType.Pawn)
                 {
-                    {
-                        continue;
-                    }
+                    continue;
+                }
 
-                    EnPassant move = new EnPassant(pos, skipPos);
-                    if (move.IsLegal(this))
-                    {
-                        return true;
-                    }
-
+                EnPassant move = new EnPassant(pos, skipPos);
+                if (move.IsLegal(this))
+                {
+                    return true;
                 }
             }
             return false;
