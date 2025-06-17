@@ -76,8 +76,6 @@ namespace šachy_upg
                     yield return new NormalMove(from, oneMovePos);
                 }
 
-                    yield return new NormalMove(from, oneMovePos);
-
                 Pozice twoMovesPos = oneMovePos + forward;
 
                 if (!HasMowed && CanMoveTo(twoMovesPos, deska))

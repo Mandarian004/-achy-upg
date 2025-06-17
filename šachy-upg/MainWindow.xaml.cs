@@ -132,8 +132,8 @@ namespace šachy_upg
             promMenu.PieceSelected += type =>
             {
                 MenuContainer.Content = null;
-                Move promMMove = new Pawn_Zmena(from, to, type);
-                HandleMove(promMMove);
+                Move promMove = new Pawn_Zmena(from, to, type);
+                HandleMove(promMove);
             };
         }
 
