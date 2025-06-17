@@ -66,6 +66,11 @@ namespace šachy_upg
 
         private void BoardGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if(IsMenuOnScreen())
+            {
+                return;
+            }
+
             Point point = e.GetPosition(BoardGrid);
             Pozice pos = toSquarePosition(point);
 
@@ -115,6 +120,12 @@ namespace šachy_upg
             gameState.MakeMove(move);
             DrawBoard(gameState.Deska);
             SetCursor(gameState.CurrentHrac);
+
+            if (gameState.IsGameOver())
+            {
+                ShowGameOver();
+            }
+
         }
 
         private void CacheMoves(IEnumerable<Move> moves)
@@ -156,6 +167,35 @@ namespace šachy_upg
             {
                 Cursor = ChessCursor.BlackCursor;
             }
+        }
+
+        private bool IsMenuOnScreen()
+        {
+            return MenuContainer.Content != null;
+        }
+
+        private void ShowGameOver()
+        {
+            GameOverMenu gameOverMenu = new GameOverMenu(gameState);
+            MenuContainer.Content = gameOverMenu;
+
+            gameOverMenu.OptionSelected += option =>
+            {
+                if (option == Option.Restart)
+                {
+                    MenuContainer.Content = null;
+                    RestartGame();
+                }
+            };
+        }
+
+        private void RestartGame()
+        {
+            HideHighLights();
+            moveCache.Clear();
+            gameState = new GameState(hrac.White, Deska.Initial());
+            DrawBoard(gameState.Deska);
+            SetCursor(gameState.CurrentHrac);
         }
     }
 }
