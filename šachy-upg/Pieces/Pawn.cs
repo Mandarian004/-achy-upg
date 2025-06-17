@@ -49,12 +49,34 @@ namespace šachy_upg
             }
             return deska[pos].Color != Color;
         }
+
+        private static IEnumerable<Move> PromotionMoves(Pozice from, Pozice to)
+        {
+            yield return new Pawn_Zmena(from, to, PieceType.Knight);
+            yield return new Pawn_Zmena(from, to, PieceType.Bishop);
+            yield return new Pawn_Zmena(from, to, PieceType.Rook);
+            yield return new Pawn_Zmena(from, to, PieceType.Queen);
+        }
+
         private IEnumerable<Move> ForwardMoves(Pozice from, Deska deska)
         {
             Pozice oneMovePos = from + forward;
 
-            if (CanMoveTo(oneMovePos, deska)) {
-            yield return new NormalMove(from, oneMovePos);
+            if (CanMoveTo(oneMovePos, deska)) 
+            {
+                if (oneMovePos.Row == 0 || oneMovePos.Row == 7)
+                {
+                    foreach (Move promMove in PromotionMoves(from, oneMovePos))
+                    {
+                        yield return promMove;
+                    }
+                }
+                else
+                {
+                    yield return new NormalMove(from, oneMovePos);
+                }
+
+                    yield return new NormalMove(from, oneMovePos);
 
                 Pozice twoMovesPos = oneMovePos + forward;
 
@@ -71,9 +93,19 @@ namespace šachy_upg
             {
                 Pozice to = from + forward + dir;
 
-                if (CanCaptureAt(to, deska)) 
+                if (CanCaptureAt(to, deska))
                 {
-                    yield return new NormalMove(from, to); 
+                    if (to.Row == 0 || to.Row == 7)
+                    {
+                        foreach (Move promMove in PromotionMoves(from, to))
+                        {
+                            yield return promMove;
+                        }
+                    }
+                    else
+                    {
+                        yield return new NormalMove(from, to);
+                    }
                 }
 
             }

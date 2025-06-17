@@ -111,8 +111,30 @@ namespace šachy_upg
 
             if(moveCache.TryGetValue(pos, out Move move))
             {
-                HandleMove(move);
+                if (move.Type == MoveType.PawnPromotion)
+                {
+                    HandlePromotion(move.FromPos, move.ToPos);
+                }
+                else
+                { 
+                    HandleMove(move);
+                }
             }
+        }
+
+        private void HandlePromotion(Pozice from, Pozice to)
+        {
+            pieceImage[to.Row, to.Column].Source = Obrazky.GetImage(gameState.CurrentHrac, PieceType.Pawn);
+            pieceImage[from.Row, from.Column].Source = null;
+            PromotionMenu promMenu = new PromotionMenu(gameState.CurrentHrac);
+            MenuContainer.Content = promMenu;
+
+            promMenu.PieceSelected += type =>
+            {
+                MenuContainer.Content = null;
+                Move promMMove = new Pawn_Zmena(from, to, type);
+                HandleMove(promMMove);
+            };
         }
 
         private void HandleMove(Move move)
