@@ -26,7 +26,11 @@
             };
         }
 
+<<<<<<< HEAD
         public override bool Execute(Deska deska)
+=======
+        public override void Execute(Deska deska)
+>>>>>>> ab1dce662257a5f4e468ef8d6ffdb0ee727dd4e9
         {
             Piece pawn = deska[FromPos];
             deska[FromPos] = null;
@@ -34,8 +38,11 @@
             Piece promotionPiece = CreatePromotionPiece(pawn.Color);
             promotionPiece.HasMowed = true;
             deska[ToPos] = promotionPiece;
+<<<<<<< HEAD
 
             return true;
+=======
+>>>>>>> ab1dce662257a5f4e468ef8d6ffdb0ee727dd4e9
         }
     }
 }

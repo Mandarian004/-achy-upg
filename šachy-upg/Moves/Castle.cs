@@ -39,12 +39,19 @@ namespace šachy_upg
             }
         }
 
+<<<<<<< HEAD
         public override bool Execute(Deska deska)
+=======
+        public override void Execute(Deska deska)
+>>>>>>> ab1dce662257a5f4e468ef8d6ffdb0ee727dd4e9
         {
             new NormalMove(FromPos, ToPos).Execute(deska);
             new NormalMove(rookFromPos, rookToPos).Execute(deska);
 
+<<<<<<< HEAD
             return false;
+=======
+>>>>>>> ab1dce662257a5f4e468ef8d6ffdb0ee727dd4e9
         }
 
         public override bool IsLegal(Deska deska)
