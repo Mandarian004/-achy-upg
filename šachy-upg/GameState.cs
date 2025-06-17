@@ -30,6 +30,7 @@ namespace šachy_upg
 
         public void MakeMove(Move move)
         {
+            Deska.SetPawnSkipPosition(CurrentHrac, null);
             move.Execute(Deska);
             CurrentHrac = CurrentHrac.protihrac();
             CheckForGameOver();

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Media3D;
-
-namespace šachy_upg
+﻿namespace šachy_upg
 {
     public class Pawn : Piece
     {
@@ -80,7 +72,7 @@ namespace šachy_upg
 
                 if (!HasMowed && CanMoveTo(twoMovesPos, deska))
                 {
-                    yield return new NormalMove(from, twoMovesPos);
+                    yield return new DoublePawn(from, twoMovesPos);
                 }
             }
         }
@@ -91,7 +83,12 @@ namespace šachy_upg
             {
                 Pozice to = from + forward + dir;
 
-                if (CanCaptureAt(to, deska))
+                if(to == deska.GetPawnSkipPosition(Color.protihrac()))
+                {
+                    yield return new EnPassant(from, to);
+                }
+
+                else if (CanCaptureAt(to, deska))
                 {
                     if (to.Row == 0 || to.Row == 7)
                     {

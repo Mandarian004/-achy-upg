@@ -12,6 +12,12 @@ namespace šachy_upg
     {
         private readonly Piece[,] pieces = new Piece[8, 8];
 
+        private readonly Dictionary<hrac, Pozice> pawnSkipPositions = new Dictionary<hrac, Pozice>
+        {
+            { hrac.White, null },
+            { hrac.Black, null }
+        };
+
         public Piece this[int row, int col]
         {
             get { return pieces[row, col]; }
@@ -22,6 +28,16 @@ namespace šachy_upg
         {
             get { return this[pos.Row, pos.Column]; }
             set { this[pos.Row, pos.Column] = value; }
+        }
+
+        public Pozice GetPawnSkipPosition(hrac hrac)
+        {
+            return pawnSkipPositions[hrac];
+        }
+
+        public void SetPawnSkipPosition(hrac hrac, Pozice pos)
+        {
+            pawnSkipPositions[hrac] = pos;
         }
 
         public static Deska Initial()
